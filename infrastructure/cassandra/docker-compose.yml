@@ -1,0 +1,29 @@
+version: '3'
+services:
+  cassandra:
+    image: bitnami/cassandra:latest
+    hostname: cassandra
+    ports:
+      - 9042:9042
+    environment:
+      - CASSANDRA_TRANSPORT_PORT_NUMBER=7000
+      - CASSANDRA_JMX_PORT_NUMBER=7199
+      - CASSANDRA_CQL_PORT_NUMBER=9042
+      - CASSANDRA_USER=cassandra_admin
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=c4_admin
+      - CASSANDRA_NUM_TOKENS=256
+      - CASSANDRA_HOST=cassandra
+      - CASSANDRA_CLUSTER_NAME=c4_cluster
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DATACENTER=datacenter1
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_BROADCAST_ADDRESS=cassandra
+    volumes:
+      - ./schema/cassandra:/docker-entrypoint-initdb.d
+      - 'cassandra-data:/bitnami'
+    restart: always
+
+volumes:
+  cassandra-data:
