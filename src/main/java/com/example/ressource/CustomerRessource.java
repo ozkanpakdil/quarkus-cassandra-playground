@@ -4,13 +4,10 @@ package com.example.ressource;
 import com.example.ressource.dto.CustomerDto;
 import com.example.ressource.mapper.CustomerMapper;
 import com.example.service.customer.CustomerService;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,9 +31,18 @@ public class CustomerRessource {
                 .collect(Collectors.toList());
     }
 
+    @GET
+    @Path("/{customerNumber}")
+    public List<CustomerDto> getPagedCustomersByCustomerNumber(@PathParam("customerNumber") String customerNumber,
+                                                               @QueryParam("pageNumber") int page,
+                                                               @QueryParam("pageSize") int offset) {
+        return customerService.findCustomersByCustomerNumber(customerNumber, page, offset).stream()
+                .map(c -> customerMapper.toDto(c))
+                .collect(Collectors.toList());
+    }
+
     @POST
     public void addCustomer(CustomerDto customerDto) {
-        customerDto.setId(UUID.randomUUID());
         customerDto.setState("IN_PROGRESS");
         customerDto.setCreationDate(LocalDate.now());
         customerService.save(customerMapper.toEntity(customerDto));

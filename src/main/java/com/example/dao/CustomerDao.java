@@ -10,6 +10,7 @@ import com.example.dao.entity.Customer;
 public interface CustomerDao {
     @Select
     PagingIterable<Customer> findAll();
+
     @Update
     void update(Customer customer);
 

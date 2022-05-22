@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXISTS customer (
-  id UUID,
+CREATE TABLE IF NOT EXISTS test.customer (
   creation_date date,
   customer_number text,
   description text,
   state text,
-  PRIMARY KEY ((id))
+  PRIMARY KEY (customer_number, creation_date)
 );
+

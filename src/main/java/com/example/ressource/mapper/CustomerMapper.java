@@ -9,7 +9,6 @@ import javax.enterprise.context.ApplicationScoped;
 public class CustomerMapper {
     public CustomerDto toDto(Customer customer) {
         return CustomerDto.builder()
-                .id(customer.getId())
                 .creationDate(customer.getCreationDate())
                 .customerNumber(customer.getCustomerNumber())
                 .description(customer.getDescription())
@@ -19,7 +18,6 @@ public class CustomerMapper {
 
     public Customer toEntity(CustomerDto customerDto) {
         return Customer.builder()
-                .id(customerDto.getId())
                 .creationDate(customerDto.getCreationDate())
                 .customerNumber(customerDto.getCustomerNumber())
                 .description(customerDto.getDescription())
