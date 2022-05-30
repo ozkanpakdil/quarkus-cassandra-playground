@@ -23,7 +23,7 @@ public class CustomerDaoTest {
     CustomerDao dao;
 
     @Test
-    @Disabled("This test is not working yet, because cassandra sux")
+//    @Disabled("This test is not working yet, because cassandra sux")
     public void testInsertAndSelectOperations() {
         // Given
         Customer givenCustomer = Customer.builder()
@@ -37,7 +37,7 @@ public class CustomerDaoTest {
         PagingIterable<Customer> pagingIterable = dao.findAll();
         //THEN
         List<Customer> allCustomers = pagingIterable.all();
-        Assertions.assertThat(allCustomers).hasSize(1);
+        Assertions.assertThat(allCustomers).hasSize(2);
     }
 
 }
